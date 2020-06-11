@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cooperation.onlineshop.mapper.OrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cooperation.onlineshop.entity.Order">
+        <id column="id" property="id" />
+        <result column="customer_id" property="customerId" />
+        <result column="status" property="status" />
+        <result column="code" property="code" />
+        <result column="order_time" property="orderTime" />
+        <result column="pay_way" property="payWay" />
+        <result column="extrafield_A" property="extrafieldA" />
+        <result column="extrafield_B" property="extrafieldB" />
+        <result column="extrafield_C" property="extrafieldC" />
+        <result column="extrafield_D" property="extrafieldD" />
+        <result column="extrafield_E" property="extrafieldE" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, customer_id, status, code, order_time, pay_way, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
+    </sql>
+
+</mapper>

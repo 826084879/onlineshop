@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.druid.initial-size",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.druid.initial-size."
+    },
+    {
+      "name": "mybatis-plus.global-config.field-strategy",
+      "type": "java.lang.String",
+      "description": "Description for mybatis-plus.global-config.field-strategy."
+    }
+  ] }

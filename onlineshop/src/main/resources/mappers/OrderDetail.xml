@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cooperation.onlineshop.mapper.OrderDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cooperation.onlineshop.entity.OrderDetail">
+        <id column="id" property="id" />
+        <result column="order_id" property="orderId" />
+        <result column="send_id" property="sendId" />
+        <result column="goods_id" property="goodsId" />
+        <result column="goods_count" property="goodsCount" />
+        <result column="extrafield_A" property="extrafieldA" />
+        <result column="extrafield_B" property="extrafieldB" />
+        <result column="extrafield_C" property="extrafieldC" />
+        <result column="extrafield_D" property="extrafieldD" />
+        <result column="extrafield_E" property="extrafieldE" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, order_id, send_id, goods_id, goods_count, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
+    </sql>
+
+</mapper>

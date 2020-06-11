@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cooperation.onlineshop.mapper.CustomerMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cooperation.onlineshop.entity.Customer">
+        <id column="id" property="id" />
+        <result column="vx_number" property="vxNumber" />
+        <result column="name" property="name" />
+        <result column="gender" property="gender" />
+        <result column="phone" property="phone" />
+        <result column="addr" property="addr" />
+        <result column="head_portrait" property="headPortrait" />
+        <result column="extrafield_A" property="extrafieldA" />
+        <result column="extrafield_B" property="extrafieldB" />
+        <result column="extrafield_C" property="extrafieldC" />
+        <result column="extrafield_D" property="extrafieldD" />
+        <result column="extrafield_E" property="extrafieldE" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, vx_number, name, gender, phone, addr, head_portrait, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
+    </sql>
+
+</mapper>

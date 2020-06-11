@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cooperation.onlineshop.mapper.GoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cooperation.onlineshop.entity.Goods">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="price" property="price" />
+        <result column="addr" property="addr" />
+        <result column="inventory" property="inventory" />
+        <result column="sales_volume" property="salesVolume" />
+        <result column="specifications" property="specifications" />
+        <result column="kind_id" property="kindId" />
+        <result column="Introduction_id" property="introductionId" />
+        <result column="custom_id" property="customId" />
+        <result column="banner_img" property="bannerImg" />
+        <result column="title_img" property="titleImg" />
+        <result column="sell_way" property="sellWay" />
+        <result column="extrafield_A" property="extrafieldA" />
+        <result column="extrafield_B" property="extrafieldB" />
+        <result column="extrafield_C" property="extrafieldC" />
+        <result column="extrafield_D" property="extrafieldD" />
+        <result column="extrafield_E" property="extrafieldE" />
+        <result column="creator" property="creator" />
+        <result column="modify_time" property="modifyTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, name, price, addr, inventory, sales_volume, specifications, kind_id, Introduction_id, custom_id, banner_img, title_img, sell_way, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E, creator, modify_time
+    </sql>
+
+    <select id="getDetailGoodsMsg" resultType="java.util.HashMap">
+        SELECT g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications, g.sell_way,
+               k.id as kindId,k.name as kindName,
+               i.id as introductionId,i.introduction,i.imgs,
+               c.id as commentId,c.customer_id, c.content,c.public_time, c.score,
+               f.id as fileId,f.name,f.path, f.size, f.Ext, f.Location
+        FROM t_goods g
+        LEFT JOIN t_kind2goods kg on kg.right_id=g.id
+        LEFT JOIN t_kinds k on kg.left_id=k.id
+
+        LEFT JOIN t_good2introduction gi on gi.left_id=g.id
+        LEFT JOIN t_introduction i on gi.right_id=i.id
+
+        LEFT JOIN t_good2comment gc on gc.left_id=g.id
+        LEFT JOIN t_comment c on gc.right_id=c.id
+
+        LEFT JOIN t_goods2files gf on gf.left_id=g.id
+        LEFT JOIN t_files f on gf.right_id=f.id
+
+        <where>
+            <if test=" name != null and name != ''">
+                and g.name =${name}
+            </if>
+        </where>
+        order by
+        <choose>
+            <when test="asc != null asc=true">
+                <if test=" orderBy != null ">
+                ${orderBy} asc,
+                </if>
+            </when>
+            <otherwise>
+                <if test=" orderBy != null ">
+                    ${orderBy} desc,
+                </if>
+            </otherwise>
+        </choose>
+        modify_time desc;
+    </select>
+
+    <select id="getGoodByName" resultType="java.util.HashMap">
+        SELECT g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications, g.sell_way,
+               k.name as kindName,
+               i.id as introductionId,i.introduction,i.imgs,
+               c.id as commentId,c.customer_id, c.content,c.public_time, c.score,
+               f.id as fileId,f.name,f.path, f.size, f.Ext, f.Location
+        FROM t_goods g
+                 LEFT JOIN t_kind2goods kg on kg.right_id=g.id
+                 LEFT JOIN t_kinds k on kg.left_id=k.id
+
+                 LEFT JOIN t_good2introduction gi on gi.left_id=g.id
+                 LEFT JOIN t_introduction i on gi.right_id=i.id
+
+                 LEFT JOIN t_good2comment gc on gc.left_id=g.id
+                 LEFT JOIN t_comment c on gc.right_id=c.id
+
+                 LEFT JOIN t_goods2files gf on gf.left_id=g.id
+                 LEFT JOIN t_files f on gf.right_id=f.id
+        <where>
+            <if test=" name != null and name != ''">
+                and g.name like concat('%',#{name},'%')
+            </if>
+        </where>
+
+    </select>
+
+</mapper>

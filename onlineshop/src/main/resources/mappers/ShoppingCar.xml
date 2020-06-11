@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cooperation.onlineshop.mapper.ShoppingCarMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cooperation.onlineshop.entity.ShoppingCar">
+        <id column="id" property="id" />
+        <result column="customer_id" property="customerId" />
+        <result column="total" property="total" />
+        <result column="extrafield_A" property="extrafieldA" />
+        <result column="extrafield_B" property="extrafieldB" />
+        <result column="extrafield_C" property="extrafieldC" />
+        <result column="extrafield_D" property="extrafieldD" />
+        <result column="extrafield_E" property="extrafieldE" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, customer_id, total, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
+    </sql>
+
+    <select id="findShoppingCarByName" resultMap="BaseResultMap">
+        SELECT id,  customer_id, total
+        FROM t_shopping_car
+        where goods_id = #{userAccount}
+    </select>
+
+    <select id="getShoppingCarDetailMsg" parameterType="Map" resultType="java.util.HashMap">
+        SELECT sc.id, g.id as goods_id, sc.customer_id, IFNULL(gl.good_count,0) as goodCount,gl.good_count*g.price as total,
+                g.name, IFNULL(g.price,0.00) as gooodsPrice, g.addr, g.specifications,g.title_img
+        FROM t_shopping_car sc
+        LEFT JOIN t_shoppingcar2good gl on gl.left_id=sc.id
+        LEFT JOIN t_goods g on gl.right_id=g.id
+        <where>
+        <if test=" goodsId != null and goodsId != ''">
+            and g.id =#{goodsId}
+        </if>
+        <if test=" customerId != null and customerId != ''">
+            and sc.customer_id=#{customerId}
+        </if>
+            and g.id is not null
+        </where>
+    </select>
+
+    <select id="clearShoppingCar" resultType="java.util.HashMap">
+        SELECT sc.id
+        FROM t_shopping_car sc
+        WHERE customer_id=#{customerId}
+    </select>
+
+</mapper>
