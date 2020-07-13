@@ -23,7 +23,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @TableName("t_goods")
 public class Goods extends Model<Goods> {
-
     private static final long serialVersionUID = 1L;
 
     private String id;
@@ -52,6 +51,9 @@ public class Goods extends Model<Goods> {
      * 销量
      */
     private Integer salesVolume;
+    private String propertyHtml;
+    private String titleHtml;
+    private String bannerHtml;
 
     /**
      * 规格
@@ -60,7 +62,7 @@ public class Goods extends Model<Goods> {
 
     private Integer sellWay;
 
-    private String detailMsg;
+    private Integer published;
 
     @TableField("extrafield_A")
     private String extrafieldA;

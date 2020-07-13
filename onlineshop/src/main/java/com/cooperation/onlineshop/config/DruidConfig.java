@@ -13,9 +13,9 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-@Configuration
-@PropertySource("classpath:application.yml")
-@ConfigurationProperties(prefix = "spring.datasource")
+//@Configuration
+//@PropertySource("classpath:application.yml")
+//@ConfigurationProperties(prefix = "spring.datasource")
 public class DruidConfig {
 
     @Value("${spring.datasource.url}")

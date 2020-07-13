@@ -1,19 +1,37 @@
 package com.cooperation.onlineshop.config;
 
+/*
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.InjectionConfig;
+import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 
-//import com.baomidou.mybatisplus.annotation.DbType;
-//import com.baomidou.mybatisplus.core.toolkit.StringPool;
-//import com.baomidou.mybatisplus.generator.AutoGenerator;
-//import com.baomidou.mybatisplus.generator.InjectionConfig;
-//import com.baomidou.mybatisplus.generator.config.*;
-//import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
-//import com.baomidou.mybatisplus.generator.config.po.TableInfo;
-//import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-//import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-//import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
-//
-//import java.util.*;
+import java.util.*;
 
+
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.core.config.GlobalConfig;
+*/
+/*
+import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
+import com.baomidou.mybatisplus.generator.InjectionConfig;
+import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+*/
 
 /**
  * Description:
@@ -30,9 +48,10 @@ public class MPGenerator {
 //    private static String authorName = "CQRenMin";
 //    //要生成的表名
 //
-//    private static String[] tables = {"t_shopping_car","t_user","t_goods","t_comment","t_files",
-//            "t_kinds","t_order","t_order_detail","t_send","t_customer","t_introduction"};
-//private static String[] tables = {"t_kind2goods","t_good2introduction","t_good2comment","t_shoppingcar2good","t_goods2files"};
+//    private static String[] tables = {"t_user2role"};
+////    //private static String[] tables = {"t_user2role","t_role","t_customer2address","t_customer2linkman",
+////    "t_address","t_linkman","t_kind2goods","t_good2introduction",
+////    "t_good2comment","t_shoppingcar2good","t_goods2files"};
 //    //table前缀
 //    private static String prefix = "t_";
 //
@@ -45,9 +64,11 @@ public class MPGenerator {
 //
 //
 //
-    public static void main(String[] args) {
+//    public static void main(String[] args) {
 //
-//
+//        if (tables.length<=0){
+//            return;
+//        }
 ////    public void mpGenerator(){
 //
 //        AutoGenerator gen = new AutoGenerator();
@@ -195,7 +216,7 @@ public class MPGenerator {
 //
 //        // 执行生成
 //        gen.execute();
-    }
+//    }
 }
 
 

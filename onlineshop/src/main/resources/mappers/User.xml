@@ -21,4 +21,21 @@
         id, username, password, phone, level, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
     </sql>
 
+    <resultMap id="userMap" type="com.cooperation.onlineshop.entity.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="com.cooperation.onlineshop.entity.Role">
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+    <select id="findByUserName"  resultMap="userMap">
+        select u.*
+             ,r.name
+        from t_User u
+                 LEFT JOIN t_user2role sru on u.id= sru.left_id
+                 LEFT JOIN t_Role r on sru.right_id=r.id
+        where username= #{username}
+    </select>
+
 </mapper>

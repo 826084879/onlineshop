@@ -4,6 +4,7 @@ import com.cooperation.onlineshop.entity.Files;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cooperation.onlineshop.entity.Goods;
 import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +24,9 @@ public interface FilesService extends IService<Files> {
 
 //    String batchFiles(String goodsId, MultipartFile[] files, String imgUseJson);
 
-    String saveFiles(MultipartFile[] files, JSONArray object);
+
+
+    String saveFiles(List<MultipartFile> files, String goodsId,String operator,int location);
+    String getBannerImgs();
 
 }

@@ -11,11 +11,9 @@
         <result column="inventory" property="inventory" />
         <result column="sales_volume" property="salesVolume" />
         <result column="specifications" property="specifications" />
-        <result column="kind_id" property="kindId" />
-        <result column="Introduction_id" property="introductionId" />
-        <result column="custom_id" property="customId" />
-        <result column="banner_img" property="bannerImg" />
-        <result column="title_img" property="titleImg" />
+        <result column="banner_html" property="bannerHtml" />
+        <result column="title_html" property="titleHtml" />
+        <result column="property_html" property="propertyHtml" />
         <result column="sell_way" property="sellWay" />
         <result column="extrafield_A" property="extrafieldA" />
         <result column="extrafield_B" property="extrafieldB" />
@@ -24,37 +22,33 @@
         <result column="extrafield_E" property="extrafieldE" />
         <result column="creator" property="creator" />
         <result column="modify_time" property="modifyTime" />
+        <result column="published" property="published" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, price, addr, inventory, sales_volume, specifications, kind_id, Introduction_id, custom_id, banner_img, title_img, sell_way, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E, creator, modify_time
+        id,name,price,addr,inventory,sales_volume,specifications,banner_html,
+        title_html,sell_way,creator,modify_time,property_html,published,
+        extrafield_A,extrafield_B,extrafield_C,extrafield_D,extrafield_E
     </sql>
 
     <select id="getDetailGoodsMsg" resultType="java.util.HashMap">
-        SELECT g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications, g.sell_way,
+        SELECT g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications,
+                g.sell_way,g.published,g.title_html,g.banner_html,g.property_html,
                k.id as kindId,k.name as kindName,
-               i.id as introductionId,i.introduction,i.imgs,
-               c.id as commentId,c.customer_id, c.content,c.public_time, c.score,
-               f.id as fileId,f.name,f.path, f.size, f.Ext, f.Location
+
+               c.id as commentId,c.customer_id, c.content,c.public_time, c.score
         FROM t_goods g
         LEFT JOIN t_kind2goods kg on kg.right_id=g.id
         LEFT JOIN t_kinds k on kg.left_id=k.id
 
-        LEFT JOIN t_good2introduction gi on gi.left_id=g.id
-        LEFT JOIN t_introduction i on gi.right_id=i.id
-
         LEFT JOIN t_good2comment gc on gc.left_id=g.id
         LEFT JOIN t_comment c on gc.right_id=c.id
 
-        LEFT JOIN t_goods2files gf on gf.left_id=g.id
-        LEFT JOIN t_files f on gf.right_id=f.id
-
-        <where>
+        WHERE g.published=1
             <if test=" name != null and name != ''">
                 and g.name =${name}
             </if>
-        </where>
         order by
         <choose>
             <when test="asc != null asc=true">
@@ -72,29 +66,37 @@
     </select>
 
     <select id="getGoodByName" resultType="java.util.HashMap">
-        SELECT g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications, g.sell_way,
-               k.name as kindName,
-               i.id as introductionId,i.introduction,i.imgs,
-               c.id as commentId,c.customer_id, c.content,c.public_time, c.score,
-               f.id as fileId,f.name,f.path, f.size, f.Ext, f.Location
+        select g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications,
+                g.sell_way,g.published,g.title_html,g.banner_html,g.property_html,
+                k.id as kindId,k.name as kindName,
+                c.id as commentId,c.customer_id, c.content,c.public_time, c.score
         FROM t_goods g
-                 LEFT JOIN t_kind2goods kg on kg.right_id=g.id
-                 LEFT JOIN t_kinds k on kg.left_id=k.id
+        LEFT JOIN t_kind2goods kg on kg.right_id=g.id
+        LEFT JOIN t_kinds k on kg.left_id=k.id
 
-                 LEFT JOIN t_good2introduction gi on gi.left_id=g.id
-                 LEFT JOIN t_introduction i on gi.right_id=i.id
-
-                 LEFT JOIN t_good2comment gc on gc.left_id=g.id
-                 LEFT JOIN t_comment c on gc.right_id=c.id
-
-                 LEFT JOIN t_goods2files gf on gf.left_id=g.id
-                 LEFT JOIN t_files f on gf.right_id=f.id
-        <where>
+        LEFT JOIN t_good2comment gc on gc.left_id=g.id
+        LEFT JOIN t_comment c on gc.right_id=c.id
+        WHERE g.published=1
             <if test=" name != null and name != ''">
                 and g.name like concat('%',#{name},'%')
             </if>
-        </where>
+    </select>
 
+    <select id="getGoodById" resultType="java.util.HashMap">
+        select g.id, g.name, g.price, g.addr, g.inventory, g.sales_volume,g.specifications,
+        g.sell_way,g.published,g.title_html,g.banner_html,g.property_html,
+        k.id as kindId,k.name as kindName,
+        c.id as commentId,c.customer_id, c.content,c.public_time, c.score
+        FROM t_goods g
+        LEFT JOIN t_kind2goods kg on kg.right_id=g.id
+        LEFT JOIN t_kinds k on kg.left_id=k.id
+
+        LEFT JOIN t_good2comment gc on gc.left_id=g.id
+        LEFT JOIN t_comment c on gc.right_id=c.id
+        WHERE g.published=1
+        <if test=" id != null and id != ''">
+            and g.id = #{id}
+        </if>
     </select>
 
 </mapper>

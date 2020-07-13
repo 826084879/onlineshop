@@ -1,6 +1,8 @@
 package com.cooperation.onlineshop.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.cooperation.onlineshop.common.UuidUtil;
 import com.cooperation.onlineshop.entity.ShoppingCar;
 import com.cooperation.onlineshop.service.ShoppingCarService;
 import net.sf.json.JSONObject;
@@ -24,6 +26,29 @@ public class ShoppingCarController {
 
     @Resource
     ShoppingCarService shoppingCarService;
+
+    //加入购物车
+    @PostMapping("/new")
+    public String newShoppingCar(@RequestParam String customerId) {
+        String res = "Fail";
+        try {
+            //如果有就不处理了
+            QueryWrapper<ShoppingCar> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("customer_id", customerId);
+            ShoppingCar one = shoppingCarService.getOne(queryWrapper);
+
+            if (one == null) {
+                ShoppingCar shoppingCar = new ShoppingCar();
+                shoppingCar.setId(UuidUtil.getShortUuid());
+                shoppingCar.setCustomerId(customerId);
+                shoppingCarService.save(shoppingCar);
+            }
+            res ="OK";
+        }catch (Exception e){
+            res = e.getMessage();
+        }
+        return res;
+    }
 
     //查询购物车
     @GetMapping("/query")

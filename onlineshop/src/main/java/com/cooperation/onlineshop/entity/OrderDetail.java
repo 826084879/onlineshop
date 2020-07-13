@@ -26,11 +26,9 @@ public class OrderDetail extends Model<OrderDetail> {
 
     private String id;
 
-    private String orderId;
+    private String leftId;
 
-    private String sendId;
-
-    private String goodsId;
+    private String rightId;;
 
     private Integer goodsCount;
 

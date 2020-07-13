@@ -18,4 +18,5 @@ import java.util.Map;
 public interface GoodsMapper extends BaseMapper<Goods> {
     List<Map<String,Object>> getDetailGoodsMsg(Map<String,Object> map);
     List<Map<String,Object>> getGoodByName(String name);
+    Map<String,Object> getGoodById(String id);
 }

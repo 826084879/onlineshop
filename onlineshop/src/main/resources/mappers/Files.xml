@@ -9,8 +9,7 @@
         <result column="path" property="path" />
         <result column="size" property="size" />
         <result column="ext" property="ext" />
-        <result column="location" property="location" />
-        <result column="orders" property="orders" />
+        <result column="operator" property="operator" />
         <result column="original_name" property="originalName" />
         <result column="extrafield_A" property="extrafieldA" />
         <result column="extrafield_B" property="extrafieldB" />
@@ -21,7 +20,29 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, name, path, size, ext, location,orders,original_name, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
+        id, name, path,operator, size, ext, original_name, extrafield_A, extrafield_B, extrafield_C, extrafield_D, extrafield_E
     </sql>
+
+    <select id="getDelFiles" resultType="java.util.HashMap">
+        select distinct f.id
+        from t_goods g
+        inner join t_files f on (g.title_html like concat('%',f.id,'%')
+            or g.banner_html like concat('%',f.id,'%')
+            or g.property_html like concat('%',f.id,'%'))
+        where g.id is not null
+    </select>
+
+
+    <select id="getBannerImgs" resultType="java.util.HashMap">
+
+       Select distinct g.id,f.path,g.modify_time
+       from t_goods g
+       inner join t_files f on (g.title_html like concat('%',f.id,'%')
+                                    or g.banner_html like concat('%',f.id,'%')
+                                    or g.property_html like concat('%',f.id,'%'))
+        where g.published=1
+       order by g.modify_time,g.id ,f.path desc
+
+    </select>
 
 </mapper>

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -49,12 +51,7 @@ public class Files extends Model<Files> {
      */
     private String ext;
 
-    /**
-     * 位置
-     */
-    private String location;
-
-    private int orders;
+    private String operator;
 
     /**
      * 文件上传前名字

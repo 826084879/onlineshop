@@ -22,10 +22,20 @@ import static com.cooperation.onlineshop.common.UuidUtil.getShortUuid;
  * @since 2020-05-17
  */
 @RestController
-@RequestMapping("/user")
+//@RequestMapping("/user")
 public class UserController {
     @Resource
     UserService userService;
+
+    @PostMapping("/admin/hello")
+    public String loginAdmin(){
+        return "hello Admin";
+    }
+
+    @PostMapping("/user/hello")
+    public String loginUser(){
+        return "hello User";
+    }
 
     /**
      * 新增用户
